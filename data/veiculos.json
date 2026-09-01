@@ -1,0 +1,18 @@
+{
+  "1": {
+    "id": 1,
+    "placa": "ABC-1234",
+    "modelo": "Toyota Corolla",
+    "ano": 2020,
+    "cliente_id": 1,
+    "ordens_ids": []
+  },
+  "2": {
+    "id": 2,
+    "placa": "DEF-5678",
+    "modelo": "Honda Civic",
+    "ano": 2022,
+    "cliente_id": 2,
+    "ordens_ids": []
+  }
+}

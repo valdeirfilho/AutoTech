@@ -1,14 +1,16 @@
-class Cliente:
-    def __init__(self, id, nome, telefone):
+class Funcionario:
+    def __init__(self, id, nome, cargo, telefone):
         self._id = id
         self._nome = nome
+        self._cargo = cargo
         self._telefone = telefone
-        self._veiculos = []
         self._validar()
     
     def _validar(self):
         if not self._nome or len(self._nome.strip()) < 2:
             raise ValueError("Nome deve ter pelo menos 2 caracteres")
+        if not self._cargo or len(self._cargo.strip()) < 2:
+            raise ValueError("Cargo deve ter pelo menos 2 caracteres")
         if not self._telefone or len(self._telefone) < 10:
             raise ValueError("Telefone inválido")
     
@@ -26,6 +28,15 @@ class Cliente:
         self._validar()
     
     @property
+    def cargo(self):
+        return self._cargo
+    
+    @cargo.setter
+    def cargo(self, valor):
+        self._cargo = valor
+        self._validar()
+    
+    @property
     def telefone(self):
         return self._telefone
     
@@ -34,20 +45,8 @@ class Cliente:
         self._telefone = valor
         self._validar()
     
-    @property
-    def veiculos(self):
-        return self._veiculos.copy()
-    
-    def adicionar_veiculo(self, veiculo):
-        if veiculo not in self._veiculos:
-            self._veiculos.append(veiculo)
-    
-    def remover_veiculo(self, veiculo):
-        if veiculo in self._veiculos:
-            self._veiculos.remove(veiculo)
-    
     def __repr__(self):
-        return f"Cliente(id={self._id}, nome='{self._nome}', telefone='{self._telefone}')"
+        return f"Funcionario(id={self._id}, nome='{self._nome}', cargo='{self._cargo}')"
     
     def __str__(self):
-        return f"{self._nome} ({self._telefone})"
+        return f"{self._nome} - {self._cargo}"

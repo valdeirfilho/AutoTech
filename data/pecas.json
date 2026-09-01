@@ -1,0 +1,16 @@
+{
+  "1": {
+    "id": 1,
+    "nome": "Filtro de oleo",
+    "descricao": "Filtro original",
+    "valor": 50.0,
+    "quantidade_estoque": 9
+  },
+  "2": {
+    "id": 2,
+    "nome": "Pastilha de freio",
+    "descricao": "Pastilha traseira",
+    "valor": 120.0,
+    "quantidade_estoque": 5
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "1": {
+    "id": 1,
+    "nome": "Troca de oleo",
+    "descricao": "Troca de oleo",
+    "valor": 150.0
+  },
+  "2": {
+    "id": 2,
+    "nome": "Alinhamento",
+    "descricao": "Alinhamento",
+    "valor": 200.0
+  }
+}

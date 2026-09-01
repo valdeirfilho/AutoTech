@@ -1,0 +1,14 @@
+{
+  "1": {
+    "id": 1,
+    "nome": "Carlos",
+    "cargo": "Mecanico",
+    "telefone": "34 98888-7777"
+  },
+  "2": {
+    "id": 2,
+    "nome": "Ana",
+    "cargo": "Assistente",
+    "telefone": "34 97777-7777"
+  }
+}
