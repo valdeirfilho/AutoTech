@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # Script de teste automático do sistema
 
+import glob
+import os
+
 from app.services import (
     ClienteService,
     VeiculoService,
@@ -9,6 +12,20 @@ from app.services import (
     FuncionarioService,
     OrdemServicoService,
 )
+
+
+def limpar_dados_de_teste():
+    """Remove arquivos persistidos antigos para garantir execução limpa."""
+    pasta_dados = os.path.join(os.path.dirname(__file__), "data")
+    if not os.path.exists(pasta_dados):
+        return
+
+    for padrao in ("*.db", "*.json", "*.sqlite", "*.sqlite3"):
+        for caminho in glob.glob(os.path.join(pasta_dados, padrao)):
+            try:
+                os.remove(caminho)
+            except FileNotFoundError:
+                continue
 
 
 def test_sistema():
@@ -102,13 +119,14 @@ def test_sistema():
     print("=" * 70)
     
     print("\nArquivos de dados criados em:")
-    print("  - data/clientes.json")
-    print("  - data/veiculos.json")
-    print("  - data/servicos.json")
-    print("  - data/pecas.json")
-    print("  - data/funcionarios.json")
-    print("  - data/ordens_servico.json")
+    print("  - data/clientes.db")
+    print("  - data/veiculos.db")
+    print("  - data/servicos.db")
+    print("  - data/pecas.db")
+    print("  - data/funcionarios.db")
+    print("  - data/ordens_servico.db")
 
 
 if __name__ == "__main__":
+    limpar_dados_de_teste()
     test_sistema()

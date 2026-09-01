@@ -4,7 +4,7 @@ from .base_repository import BaseRepository
 
 class PecaRepository(BaseRepository):
     def __init__(self, arquivo_dados="data/pecas.json"):
-        super().__init__(arquivo_dados)
+        super().__init__(arquivo_dados, "pecas")
     
     def salvar(self, peca):
         """Salva ou atualiza uma peça"""

@@ -4,7 +4,7 @@ from .base_repository import BaseRepository
 
 class FuncionarioRepository(BaseRepository):
     def __init__(self, arquivo_dados="data/funcionarios.json"):
-        super().__init__(arquivo_dados)
+        super().__init__(arquivo_dados, "funcionarios")
     
     def salvar(self, funcionario):
         """Salva ou atualiza um funcionário"""

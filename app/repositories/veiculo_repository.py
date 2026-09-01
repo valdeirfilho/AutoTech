@@ -4,7 +4,7 @@ from .base_repository import BaseRepository
 
 class VeiculoRepository(BaseRepository):
     def __init__(self, arquivo_dados="data/veiculos.json"):
-        super().__init__(arquivo_dados)
+        super().__init__(arquivo_dados, "veiculos")
     
     def salvar(self, veiculo):
         """Salva ou atualiza um veículo"""

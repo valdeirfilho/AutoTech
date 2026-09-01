@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OficinaTech Web</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --primary: #1d4ed8;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #dfe7f0;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 24px auto;
+        padding: 0 20px;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        margin-bottom: 20px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+      }
+
+      .card h2 {
+        margin-top: 0;
+        font-size: 1.1rem;
+      }
+
+      form {
+        display: grid;
+        gap: 10px;
+      }
+
+      label {
+        font-size: 0.92rem;
+        color: var(--text);
+      }
+
+      input, button {
+        font: inherit;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: white;
+      }
+
+      button {
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        cursor: pointer;
+        background: var(--primary);
+        color: white;
+        font-weight: 600;
+      }
+
+      button.secondary {
+        background: #e5e7eb;
+        color: var(--text);
+      }
+
+      #message {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #e0f2fe;
+        color: #0f172a;
+        display: none;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        background: #111827;
+        color: #e5e7eb;
+        border-radius: 10px;
+        padding: 14px;
+        overflow: auto;
+        min-height: 220px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>OficinaTech</h1>
+      <div class="subtitle">Frontend web para acompanhar o backend da oficina</div>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Cliente</h2>
+          <form id="clienteForm">
+            <label>ID <input name="id" type="number" required /></label>
+            <label>Nome <input name="nome" required /></label>
+            <label>Telefone <input name="telefone" required /></label>
+            <button type="submit">Salvar cliente</button>
+            <button type="button" class="secondary" id="listarClientesBtn">Listar clientes</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Veículo</h2>
+          <form id="veiculoForm">
+            <label>ID <input name="id" type="number" required /></label>
+            <label>Placa <input name="placa" required /></label>
+            <label>Modelo <input name="modelo" required /></label>
+            <label>Ano <input name="ano" type="number" required /></label>
+            <label>Cliente ID <input name="cliente_id" type="number" required /></label>
+            <button type="submit">Salvar veículo</button>
+            <button type="button" class="secondary" id="listarVeiculosBtn">Listar veículos</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Serviço</h2>
+          <form id="servicoForm">
+            <label>ID <input name="id" type="number" required /></label>
+            <label>Nome <input name="nome" required /></label>
+            <label>Descrição <input name="descricao" required /></label>
+            <label>Valor <input name="valor" type="number" step="0.01" required /></label>
+            <button type="submit">Salvar serviço</button>
+            <button type="button" class="secondary" id="listarServicosBtn">Listar serviços</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Peça</h2>
+          <form id="pecaForm">
+            <label>ID <input name="id" type="number" required /></label>
+            <label>Nome <input name="nome" required /></label>
+            <label>Descrição <input name="descricao" required /></label>
+            <label>Valor <input name="valor" type="number" step="0.01" required /></label>
+            <label>Estoque <input name="quantidade_estoque" type="number" required /></label>
+            <button type="submit">Salvar peça</button>
+            <button type="button" class="secondary" id="listarPecasBtn">Listar peças</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Funcionário</h2>
+          <form id="funcionarioForm">
+            <label>ID <input name="id" type="number" required /></label>
+            <label>Nome <input name="nome" required /></label>
+            <label>Cargo <input name="cargo" required /></label>
+            <label>Telefone <input name="telefone" required /></label>
+            <button type="submit">Salvar funcionário</button>
+            <button type="button" class="secondary" id="listarFuncionariosBtn">Listar funcionários</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Ordem</h2>
+          <form id="ordemForm">
+            <label>ID <input name="id" type="number" required /></label>
+            <label>Cliente ID <input name="cliente_id" type="number" required /></label>
+            <label>Veículo ID <input name="veiculo_id" type="number" required /></label>
+            <button type="submit">Criar ordem</button>
+            <button type="button" class="secondary" id="listarOrdensBtn">Listar ordens</button>
+          </form>
+        </section>
+      </div>
+
+      <div id="message"></div>
+      <pre id="output">Aguardando dados...</pre>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

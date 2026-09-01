@@ -4,7 +4,7 @@ from .base_repository import BaseRepository
 
 class ClienteRepository(BaseRepository):
     def __init__(self, arquivo_dados="data/clientes.json"):
-        super().__init__(arquivo_dados)
+        super().__init__(arquivo_dados, "clientes")
     
     def salvar(self, cliente):
         """Salva ou atualiza um cliente"""

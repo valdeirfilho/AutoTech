@@ -7,17 +7,32 @@ Sistema fictício para gerenciamento de uma oficina mecânica com arquitetura em
 ## Estrutura
 
 - `app/models` — Objetos do domínio com encapsulamento e validações
-- `app/repositories` — Camada de persistência (JSON)
+- `app/repositories` — Camada de persistência (SQLite)
 - `app/services` — Regras de negócio e orquestração
 - `app/controllers` — Coordenação entre menu e serviços
 - `app/menu.py` — Interface interativa em linha de comando
 
 ## Execução
 
-### Menu Interativo (Principal)
+### Menu Interativo (Terminal)
 ```bash
 python main.py
 ```
+
+### Interface Desktop (Tkinter)
+```bash
+python desktop.py
+```
+
+### Frontend Web (MVP)
+```bash
+uvicorn app.api:app --reload
+```
+
+Acesse:
+- http://localhost:8000/ — painel web inicial
+- http://localhost:8000/docs — documentação da API REST
+- http://localhost:8000/redoc — documentação alternativa
 
 ### Testes Automáticos
 ```bash
@@ -90,27 +105,26 @@ python test_system.py
              │
 ┌────────────▼────────────────────┐
 │      REPOSITORIES               │
-│    (Persistência em JSON)       │
+│    (Persistência em SQLite)      │
 └─────────────────────────────────┘
 ```
 
 ## Dados Persistentes
 
-Os dados são salvos automaticamente em JSON:
-- `data/clientes.json`
-- `data/veiculos.json`
-- `data/servicos.json`
-- `data/pecas.json`
-- `data/funcionarios.json`
-- `data/ordens_servico.json`
+Os dados são salvos automaticamente em SQLite:
+- `data/clientes.db`
+- `data/veiculos.db`
+- `data/servicos.db`
+- `data/pecas.db`
+- `data/funcionarios.db`
+- `data/ordens_servico.db`
 
 ## Próximas Melhorias
 
-1. Banco de dados (SQLite/PostgreSQL)
-2. API REST (Flask/FastAPI)
-3. Testes unitários completos
-4. Interface gráfica (Tkinter/Qt)
-5. Autenticação de usuários
-6. Geração de relatórios (PDF)
-7. Dashboard com métricas
-8. Sincronização multi-usuário
+1. API REST (Flask/FastAPI)
+2. Testes unitários completos
+3. Interface gráfica (Tkinter/Qt)
+4. Autenticação de usuários
+5. Geração de relatórios (PDF)
+6. Dashboard com métricas
+7. Sincronização multi-usuário

@@ -5,7 +5,7 @@ from .base_repository import BaseRepository
 
 class OrdemServicoRepository(BaseRepository):
     def __init__(self, arquivo_dados="data/ordens_servico.json"):
-        super().__init__(arquivo_dados)
+        super().__init__(arquivo_dados, "ordens_servico")
     
     def salvar(self, ordem):
         """Salva ou atualiza uma ordem de serviço"""
