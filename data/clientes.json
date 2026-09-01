@@ -14,5 +14,11 @@
     "veiculos_ids": [
       2
     ]
+  },
+  "0": {
+    "id": 0,
+    "nome": "Marcos Alberto",
+    "telefone": "34996743578",
+    "veiculos_ids": []
   }
 }
