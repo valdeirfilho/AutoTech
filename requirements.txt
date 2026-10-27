@@ -1,1 +1,2 @@
-# Nenhuma dependência externa; usa a biblioteca padrão do Python.\n
+# Interface web (instale com: py -m pip install -r requirements.txt)
+nicegui>=2.0,<4.0

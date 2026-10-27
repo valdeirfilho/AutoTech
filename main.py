@@ -1,4 +1,5 @@
 import argparse
+
 from app.database.database import Database
 from app.models.cliente import Cliente
 from app.models.veiculo import Veiculo
