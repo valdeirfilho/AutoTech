@@ -1,2 +1,1 @@
-# Interface web (instale com: py -m pip install -r requirements.txt)
-nicegui>=2.0,<4.0
+# A base utiliza apenas a biblioteca padrão do Python. Cada grupo adicionará as dependências da sua interface.
