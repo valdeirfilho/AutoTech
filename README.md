@@ -1,16 +1,27 @@
-# AutoTech — Oficina mecânica
+# AutoTech — Base para desenvolvimento de interfaces gráficas
 
-Projeto didático de POO II com Python e SQLite. Inclui modelos, repositórios, uma camada de serviços compartilhada, uma interface web inicial com NiceGUI e um ponto de entrada inicial para a interface desktop com Tkinter.
+Projeto didático de Programação Orientada a Objetos II com Python e SQLite.
+
+Esta branch contém somente a base funcional do sistema: modelos, banco de dados, repositórios, serviços e testes automatizados. **Não há interface gráfica implementada.** Cada grupo deverá construir sua própria interface utilizando a mesma camada de negócio.
 
 ## Requisitos
 
 - Python 3.10 ou superior.
-- Para a interface web, conexão à internet apenas durante a instalação do NiceGUI, se ele ainda não estiver instalado.
-- A versão desktop utiliza Tkinter, normalmente incluído na instalação padrão do Python para Windows.
+- Nenhuma dependência externa para executar a base.
+- SQLite, disponível na biblioteca padrão do Python.
 
-## Executar os testes
+## Preparação do ambiente (Windows)
 
 Na pasta do projeto:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+Não é necessário instalar bibliotecas externas para testar a base.
+
+## Executar os testes
 
 ```powershell
 py -m unittest discover -s tests -v
@@ -28,60 +39,60 @@ Para abrir o menu de terminal:
 py main.py
 ```
 
-## Interface web (NiceGUI)
-
-1. Crie e ative um ambiente virtual (recomendado):
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-2. Instale a dependência da interface web:
-
-```powershell
-py -m pip install -r requirements.txt
-```
-
-3. Inicie a aplicação:
-
-```powershell
-py -m app.interfaces.web.main
-```
-
-4. Abra no navegador o endereço informado pelo NiceGUI; por padrão, a aplicação usa `http://127.0.0.1:8080`.
-
-A interface inicial permite cadastrar clientes, veículos, mecânicos, serviços e peças, abrir ordens de serviço, consultar os totais e alterar o status das ordens. As regras de negócio ficam na classe `OficinaService`, e não diretamente nos repositórios nem na tela.
-
-### Acesso pela rede local
-
-Para disponibilizar a interface a outros computadores da rede, altere o parâmetro `host` de `ui.run` em `app/interfaces/web/main.py` para `0.0.0.0`, configure o firewall conforme a política da instituição e informe aos usuários o endereço IP do computador servidor com a porta `8080`. Faça isso apenas em uma rede confiável. Nesta primeira versão, o sistema ainda não tem autenticação nem controle de permissões.
-
-## Interface desktop (Tkinter)
-
-A versão desktop tem somente uma janela inicial de estrutura. A implementação das telas de cadastro e ordens de serviço será feita após validar os casos de uso na interface web.
-
-```powershell
-py -m app.interfaces.desktop.main
-```
-
-## Arquitetura
+## Arquitetura disponível
 
 ```text
 app/
-├── database/       # conexão e esquema SQLite
-├── models/         # entidades e regras de domínio
-├── repositories/   # persistência e consultas
-├── services/       # casos de uso e regras compartilhadas
-└── interfaces/
-    ├── web/        # NiceGUI
-    └── desktop/    # Tkinter (estrutura inicial)
+├── database/       # conexão, esquema e persistência SQLite
+├── models/         # entidades e regras do domínio
+├── repositories/   # operações de persistência e consultas
+├── services/       # casos de uso e regras de negócio
+└── interfaces/     # espaço reservado para as interfaces dos grupos
+    ├── grupo_1/
+    ├── grupo_2/
+    ├── grupo_3/
+    ├── grupo_4/
+    └── grupo_5/
+
+tests/              # testes automatizados da base
+docs/               # documentação do trabalho
 ```
 
-## Observações importantes
+## Integração com a base
 
-- O arquivo `oficina.db` é criado na pasta do projeto na primeira execução da interface web.
-- O banco local não deve ser colocado no Git; ele está no `.gitignore`.
-- A interface inicial valida se o veículo pertence ao cliente selecionado e verifica a disponibilidade de estoque para as peças incluídas na ordem.
-- A quantidade em estoque ainda não é descontada automaticamente ao abrir uma ordem. Essa regra deverá ser definida e implementada separadamente para evitar descontos duplicados quando uma ordem for editada ou cancelada.
-- Esta versão ainda não inclui login, permissões, edição/exclusão por tela, relatórios ou impressão.
+As interfaces devem utilizar a classe `Database` e a fachada `OficinaService`. Não implementem SQL diretamente nas telas e não dupliquem classes de domínio.
+
+Exemplo de inicialização (ajuste o caminho conforme a localização do arquivo da interface):
+
+```python
+from pathlib import Path
+
+from app.database.database import Database
+from app.services.oficina_service import OficinaService
+
+ROOT = Path(__file__).resolve().parents[3]
+database = Database(ROOT / "oficina.db")
+service = OficinaService(database)
+```
+
+A classe `OficinaService` oferece operações para cadastrar clientes, veículos, mecânicos, serviços e peças, abrir ordens de serviço, alterar seus status e consultar um resumo da oficina. Os repositórios também estão disponíveis por meio de atributos do serviço, como `service.clientes`, `service.veiculos` e `service.ordens`.
+
+Consulte [docs/trabalho_interfaces_graficas.md](docs/trabalho_interfaces_graficas.md) para os requisitos e as regras de desenvolvimento.
+
+## Banco de dados
+
+- O arquivo `oficina.db` é criado automaticamente na primeira inicialização da base.
+- O banco local está no `.gitignore` e não deve ser enviado ao Git.
+- Cada instalação local terá seu próprio arquivo SQLite. Os grupos não compartilham um banco remoto.
+
+## Regras de negócio já implementadas
+
+- Associação de veículo ao cliente.
+- Validação de que o veículo pertence ao cliente selecionado na abertura da ordem.
+- Verificação da disponibilidade de estoque para peças incluídas na ordem.
+- Cálculo do total da ordem de serviço.
+- Preservação dos valores aplicados no momento da abertura da ordem.
+- Transições de status controladas.
+- Persistência das operações em SQLite.
+
+A quantidade em estoque ainda não é descontada automaticamente ao abrir uma ordem. Essa regra deverá ser definida separadamente para evitar descontos duplicados em caso de edição ou cancelamento.
